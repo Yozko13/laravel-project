@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Web\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::prefix('cms')->group(function () {
+    Route::controller(UserController::class)->group(function () {
+        Route::get('login', 'cmsLogin')->name('cms.login');
+        Route::post('login', 'cmsLoginForm')->name('cms.login-form');
+    });
+});
