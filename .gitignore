@@ -21,3 +21,12 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
+
+docker-compose.override.yml
+/.idea
+/.vscode
+/error_log
+/cgi-bin
+/php.fcgi
+/php81-fcgi.ini
+/public/error_log
