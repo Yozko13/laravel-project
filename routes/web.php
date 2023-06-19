@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Web\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -21,5 +23,15 @@ Route::prefix('cms')->group(function () {
     Route::controller(UserController::class)->group(function () {
         Route::get('login', 'cmsLogin')->name('cms.login');
         Route::post('login', 'cmsLoginForm')->name('cms.login-form');
+    });
+
+    Route::middleware(['auth'])->group(function () {
+        Route::controller(AdminHomeController::class)->group(function () {
+            Route::get('/dashboard', 'index')->name('cms.dashboard');
+        });
+
+        Route::controller(CategoriesController::class)->group(function () {
+            Route::get('/categories', 'index')->name('cms.categories.index');
+        });
     });
 });

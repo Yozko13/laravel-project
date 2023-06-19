@@ -4,5 +4,15 @@
     "Еmail": "Имейл",
     "Password": "Парола",
     "Remember me": "Запомни ме",
-    "Incorrect login details": "Грешни данни за вход"
+    "Incorrect login details": "Грешни данни за вход",
+    "Menu": "Меню",
+    "Nomenclatures": "Номенклатури",
+    "Categories": "Категории",
+    "Icon": "Иконка",
+    "Image": "Снимка",
+    "Name": "Име",
+    "Description": "Описание",
+    "Status": "Статус",
+    "Actions": "Действия",
+    "Colors": "Цветове"
 }
