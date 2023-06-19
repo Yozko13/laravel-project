@@ -14,6 +14,7 @@
         <!-- inject:css -->
         <!-- endinject -->
         <!-- Layout styles -->
+        <link rel="stylesheet" href="{{ asset('css/common-styles.css') }}" />
         <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}" />
         <!-- End layout styles -->
         <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" />

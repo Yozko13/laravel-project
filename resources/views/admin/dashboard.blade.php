@@ -373,6 +373,16 @@
         <!-- partial -->
         <div class="main-panel">
             <div class="content-wrapper">
+                @if (Session::has('success_message'))
+                    <div class="row">
+                        <div class="col-12 alert alert-success">{{ Session::get('success_message') }}</div>
+                    </div>
+                @endif
+                @error('system_error')
+                    <div class="row">
+                        <div class="col-12 alert alert-danger">{{ $message }}</div>
+                    </div>
+                @enderror
                 @yield('dashboard_content')
             </div>
             <!-- content-wrapper ends -->

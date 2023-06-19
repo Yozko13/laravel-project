@@ -21,7 +21,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::prefix('cms')->group(function () {
     Route::controller(UserController::class)->group(function () {
-        Route::get('login', 'cmsLogin')->name('cms.login');
+        Route::get('login',  'cmsLogin')->name('cms.login');
         Route::post('login', 'cmsLoginForm')->name('cms.login-form');
     });
 
@@ -30,8 +30,12 @@ Route::prefix('cms')->group(function () {
             Route::get('/dashboard', 'index')->name('cms.dashboard');
         });
 
-        Route::controller(CategoriesController::class)->group(function () {
-            Route::get('/categories', 'index')->name('cms.categories.index');
+        Route::controller(CategoriesController::class)->prefix('categories')->group(function () {
+            Route::get('/',                   'index')->name('cms.categories.index');
+            Route::get('/create',             'create')->name('cms.categories.create');
+            Route::post('/store',             'store')->name('cms.categories.store');
+            Route::get('/{category}/edit',    'edit')->name('cms.categories.edit');
+            Route::post('/{category}/update', 'update')->name('cms.categories.update');
         });
     });
 });

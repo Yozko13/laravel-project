@@ -13,7 +13,7 @@ class StoreCategoriesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class StoreCategoriesRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'        => 'required|min:3',
+            'description' => 'nullable|min:10',
+            'image'       => 'nullable|image|mimes:jpeg,png|max:2048',
         ];
     }
 }
