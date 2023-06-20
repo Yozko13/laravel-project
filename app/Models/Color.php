@@ -6,16 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Categories extends Model
+class Color extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
         'name',
-        'description',
-        'image',
-        'icon',
+        'color',
         'active',
     ];
 }

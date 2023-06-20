@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Categories;
+use App\Models\Color;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CategoriesPolicy
+class ColorPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class CategoriesPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Categories  $categories
+     * @param  \App\Models\Color  $color
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Categories $categories)
+    public function view(User $user, Color $color)
     {
         //
     }
@@ -48,10 +48,10 @@ class CategoriesPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Categories  $categories
+     * @param  \App\Models\Color  $color
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Categories $categories)
+    public function update(User $user, Color $color)
     {
         //
     }
@@ -60,10 +60,10 @@ class CategoriesPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Categories  $categories
+     * @param  \App\Models\Color  $color
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Categories $categories)
+    public function delete(User $user, Color $color)
     {
         //
     }
@@ -72,10 +72,10 @@ class CategoriesPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Categories  $categories
+     * @param  \App\Models\Color  $color
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Categories $categories)
+    public function restore(User $user, Color $color)
     {
         //
     }
@@ -84,10 +84,10 @@ class CategoriesPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Categories  $categories
+     * @param  \App\Models\Color  $color
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Categories $categories)
+    public function forceDelete(User $user, Color $color)
     {
         //
     }

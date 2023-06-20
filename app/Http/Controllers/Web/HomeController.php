@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,6 +13,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('web.index');
+        $categories = Category::whereActive(true)->get();
+
+        return view('web.index', compact('categories'));
     }
 }

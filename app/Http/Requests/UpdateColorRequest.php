@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCategoriesRequest extends FormRequest
+class UpdateColorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class UpdateCategoriesRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'        => 'required|min:3',
-            'description' => 'nullable|min:10',
-            'image'       => 'nullable|image|mimes:jpeg,png|max:2048',
+            'name'  => 'required|min:3',
+            'color' => 'required',
         ];
     }
 }

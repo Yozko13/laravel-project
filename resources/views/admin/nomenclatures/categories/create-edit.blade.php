@@ -39,7 +39,7 @@
                         <div class="form-group row">
                             <label for="categoryName" class="col-sm-3 col-form-label">{{ __('Name') }} *</label>
                             <div class="col-sm-9">
-                                <input type="text" name="name" class="form-control" id="categoryName"
+                                <input type="text" name="name" class="form-control" id="categoryName" required
                                     placeholder="{{ __('Name') }}" value="{{ old('name') ?? $category->name ?? '' }}"
                                 />
                                 @error('name')
@@ -59,7 +59,7 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary mr-2">{{ __(isset($category) ? 'Save' : 'Add') }}</button>
-                        <button class="btn btn-dark">{{ __('Back') }}</button>
+                        <a href="{{ route('cms.categories.index') }}" class="btn btn-dark">{{ __('Back') }}</a>
                     </form>
                 </div>
             </div>

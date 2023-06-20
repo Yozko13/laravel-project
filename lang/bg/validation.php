@@ -91,10 +91,10 @@ return [
     'mimes' => 'The :attribute must be a file of type: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
-        'numeric' => 'The :attribute must be at least :min.',
-        'file' => 'The :attribute must be at least :min kilobytes.',
-        'string' => 'The :attribute must be at least :min characters.',
-        'array' => 'The :attribute must have at least :min items.',
+        'numeric' => 'Полето :attribute трябва да бъде поне :min.',
+        'file' => 'Полето :attribute трябва да бъде поне :min килобайта.',
+        'string' => 'Полето :attribute трябва да бъде поне :min символа.',
+        'array' => 'Полето :attribute трябва да има поне :min елемента.',
     ],
     'multiple_of' => 'The :attribute must be a multiple of :value.',
     'not_in' => 'Избраният :attribute е невалиден.',
@@ -159,8 +159,12 @@ return [
     */
 
     'attributes' => [
-        'email' => 'Имейл',
-        'password' => 'Парола',
+        'email'       => 'Имейл',
+        'password'    => 'Парола',
+        'name'        => 'Име',
+        'image'       => 'Снимка',
+        'description' => 'Описание',
+        'image'       => 'Снимка',
     ],
 
 ];

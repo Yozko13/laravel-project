@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categories;
-use App\Http\Requests\StoreCategoriesRequest;
-use App\Http\Requests\UpdateCategoriesRequest;
+use App\Models\Category;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use Exception;
 use Illuminate\Support\Facades\Storage;
 
-class CategoriesController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Categories::orderBy('name', 'DESC')->paginate(20);
+        $categories = Category::orderBy('name', 'DESC')->paginate(20);
 
         return view('admin.nomenclatures.categories.index', compact('categories'));
     }
@@ -35,15 +35,15 @@ class CategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCategoriesRequest  $request
+     * @param  \App\Http\Requests\StoreCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoriesRequest $request)
+    public function store(StoreCategoryRequest $request)
     {
         $data = $request->except('_token', 'image');
 
         try {
-            $category = Categories::create($data);
+            $category = Category::create($data);
 
             if (!isset($category)) {
                 throw new Exception("Is not create category", 1);
@@ -72,10 +72,10 @@ class CategoriesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Categories  $categories
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Categories $categories)
+    public function show(Category $category)
     {
         //
     }
@@ -83,10 +83,10 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Categories  $category
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categories $category)
+    public function edit(Category $category)
     {
         return view('admin.nomenclatures.categories.create-edit', compact('category'));
     }
@@ -94,11 +94,11 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCategoriesRequest  $request
-     * @param  \App\Models\Categories  $category
+     * @param  \App\Http\Requests\UpdateCategoryRequest  $request
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoriesRequest $request, Categories $category)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
         $data = $request->except('_token', 'image');
 
@@ -134,10 +134,10 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Categories  $categories
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categories $categories)
+    public function destroy(Category $category)
     {
         //
     }

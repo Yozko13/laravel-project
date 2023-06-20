@@ -88,7 +88,7 @@
                             <a class="nav-link" href="{{ route('cms.categories.index') }}">{{ __('Categories') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">{{ __('Colors') }}</a>
+                            <a class="nav-link" href="{{ route('cms.colors.index') }}">{{ __('Colors') }}</a>
                         </li>
                     </ul>
                 </div>
