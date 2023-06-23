@@ -26,6 +26,7 @@ Homestead.json
 docker-compose.override.yml
 /.idea
 /.vscode
+/.well-known
 /error_log
 /cgi-bin
 /php.fcgi

@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ColorController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Web\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -20,31 +21,39 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::prefix('cms')->group(function () {
+Route::prefix('cms')->as('cms.')->group(function () {
     Route::controller(UserController::class)->group(function () {
-        Route::get('login',  'cmsLogin')->name('cms.login');
-        Route::post('login', 'cmsLoginForm')->name('cms.login-form');
+        Route::get('login',  'cmsLogin')->name('login');
+        Route::post('login', 'cmsLoginForm')->name('login-form');
     });
 
     Route::middleware(['auth'])->group(function () {
         Route::controller(AdminHomeController::class)->group(function () {
-            Route::get('/dashboard', 'index')->name('cms.dashboard');
+            Route::get('/dashboard', 'index')->name('dashboard');
         });
 
-        Route::controller(CategoryController::class)->prefix('categories')->group(function () {
-            Route::get('/',                   'index')->name('cms.categories.index');
-            Route::get('/create',             'create')->name('cms.categories.create');
-            Route::post('/store',             'store')->name('cms.categories.store');
-            Route::get('/{category}/edit',    'edit')->name('cms.categories.edit');
-            Route::post('/{category}/update', 'update')->name('cms.categories.update');
+        Route::controller(CategoryController::class)->prefix('categories')->as('categories.')->group(function () {
+            Route::get('/',                   'index')->name('index');
+            Route::get('/create',             'create')->name('create');
+            Route::post('/store',             'store')->name('store');
+            Route::get('/{category}/edit',    'edit')->name('edit');
+            Route::post('/{category}/update', 'update')->name('update');
         });
 
-        Route::controller(ColorController::class)->prefix('colors')->group(function () {
-            Route::get('/',                'index')->name('cms.colors.index');
-            Route::get('/create',          'create')->name('cms.colors.create');
-            Route::post('/store',          'store')->name('cms.colors.store');
-            Route::get('/{color}/edit',    'edit')->name('cms.colors.edit');
-            Route::post('/{color}/update', 'update')->name('cms.colors.update');
+        Route::controller(ColorController::class)->prefix('colors')->as('colors.')->group(function () {
+            Route::get('/',                'index')->name('index');
+            Route::get('/create',          'create')->name('create');
+            Route::post('/store',          'store')->name('store');
+            Route::get('/{color}/edit',    'edit')->name('edit');
+            Route::post('/{color}/update', 'update')->name('update');
+        });
+
+        Route::controller(ProductController::class)->prefix('products')->as('products.')->group(function () {
+            Route::get('/',                'index')->name('index');
+            Route::get('/create',          'create')->name('create');
+            Route::post('/store',          'store')->name('store');
+            Route::get('/{color}/edit',    'edit')->name('edit');
+            Route::post('/{color}/update', 'update')->name('update');
         });
     });
 });
