@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('price');
             $table->boolean('in_stock')->default(true);
             $table->boolean('active')->default(true);
+            $table->string('slug')->unique();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -11,6 +11,7 @@ use App\Models\Color;
 use App\Models\ProductImage;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -106,7 +107,16 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $categories = Category::whereActive(true)->orderBy('name')->get();
+        $colors     = Color::whereActive(true)->orderBy('name')->get();
+        $old_images = [];
+
+        foreach ($product->images as $key => $image) {
+            $old_images[$key]['id']  = $image->id;
+            $old_images[$key]['src'] = $image->getImageUrl();
+        }
+
+        return view('admin.product.create-edit', compact('product', 'old_images', 'categories', 'colors'));
     }
 
     /**
@@ -118,18 +128,64 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
+        $data = $request->except('_token', 'images', 'old_images', 'colors');
 
-        // if ($request->has('old_images')) {
-        //     foreach ($request->old_images as $old_image_id) {
-        //         # code...
-        //     }
-        //     $file = $request->file('image');
-        //     $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-        //     $file->storeAs('public/uploads/categories', $filename);
+        DB::beginTransaction();
 
-        //     $product->image = $filename;
-        //     $product->save();
-        // }
+        try {
+            $product->fill($data);
+            $product->save($data);
+
+            $product->colors()->sync($request->colors);
+
+            if (count($request->old_images) != $product->images->count()) {
+                $remove_image_ids = array_diff($product->images->pluck('id')->toArray(), $request->old_images);
+                foreach ($remove_image_ids as $image_id) {
+                    $removeImage = ProductImage::find($image_id);
+
+                    if (isset($removeImage) && Storage::exists('public/uploads/product-images/' . $removeImage->image)) {
+                        if (Storage::delete('public/uploads/product-images/' . $removeImage->image)) {
+                            $removeImage->delete();
+                        }
+                    }
+                }
+            }
+
+            if (isset($request->images)) {
+                foreach ($request->images as $image) {
+                    $file = $image;
+                    $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+                    $file->storeAs('public/uploads/product-images', $filename);
+
+                    ProductImage::create([
+                        'product_id' => $product->id,
+                        'image'      => $filename,
+                    ]);
+                }
+            }
+
+            $product->refresh();
+
+            $main_image = $product->images->where('is_main', true)->first();
+            if (!isset($main_image)) {
+                $first_image = $product->images->first();
+                $first_image->is_main = true;
+                $first_image->save();
+            }
+
+            DB::commit();
+
+            return to_route('cms.products.index')->with(
+                'success_message',
+                __('Successfully saved :name :title', ['name' => __('Product'), 'title' => $product->name])
+            );
+        } catch (\Throwable $th) {
+            report($th);
+
+            DB::rollBack();
+
+            return back()->withErrors(['system_error' => __('System error')]);
+        }
     }
 
     /**

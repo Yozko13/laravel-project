@@ -14,11 +14,13 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>{{ __('Category') }}</th>
                                     <th>{{ __('Image') }}</th>
+                                    <th>{{ __('Category') }}</th>
                                     <th>{{ __('Name') }}</th>
                                     <th>{{ __('Description') }}</th>
                                     <th>{{ __('Price') }}</th>
+                                    <th>{{ __('A name for the URL') }}</th>
+                                    <th>{{ __('Colors') }}</th>
                                     <th>{{ __('In stock') }}</th>
                                     <th>{{ __('Status') }}</th>
                                     <th>{{ __('Actions') }}</th>
@@ -34,6 +36,8 @@
                                         <td>{{ $product->category->name }}</td>
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->description }}</td>
+                                        <td>{{ $product->price }}лв.</td>
+                                        <td>{{ $product->slug }}</td>
                                         <td>
                                             @foreach ($product->colors as $color)
                                                 <p style="color: {{ $color->color }};">{{ $color->name }}</p>

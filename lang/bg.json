@@ -21,6 +21,7 @@
     "Upload Image": "Качи снимка",
     "Upload Images": "Качи снимки",
     "Name": "Име",
+    "A name for the URL": "Име за URL",
     "Description": "Описание",
     "Status": "Статус",
     "Actions": "Действия",
@@ -35,5 +36,6 @@
     "System error": "Системна грешка",
     "Active": "Активен",
     "Inactive": "Неактивен",
-    "Edit": "Редактирай"
+    "Edit": "Редактирай",
+    "From :price lv.": "От :price лв."
 }

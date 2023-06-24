@@ -17,6 +17,9 @@
                                 $chosen_colors = $product->colors->pluck('id')->toArray();
                             }
                         @endphp
+                        @isset($product)
+                            <input type="hidden" name="id" value="{{ $product->id }}" />
+                        @endisset
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">{{ __('Upload Images') }} *</label>
                             <div class="col-sm-9">
@@ -75,6 +78,18 @@
                                     <span class="input-group-text">лв.</span>
                                 </div>
                                 @error('price')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="productSlug" class="col-sm-3 col-form-label">{{ __('A name for the URL') }} *</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="slug" class="form-control" id="productSlug" required
+                                    placeholder="{{ __('A name for the URL') }}"
+                                    value="{{ old('slug') ?? $product->slug ?? '' }}"
+                                />
+                                @error('slug')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>

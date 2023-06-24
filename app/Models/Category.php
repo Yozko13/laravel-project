@@ -20,6 +20,14 @@ class Category extends Model
     ];
 
     /**
+     * @return hasMany
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class)->whereActive(true)->where('in_stock', true)->orderBy('price');
+    }
+
+    /**
      * @return string
      */
     public function getImageUrl(): string

@@ -97,14 +97,14 @@
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix">
             <div class="amado-pro-catagory clearfix">
-                @foreach ($categories as $category)
+                @foreach ($category_list as $category)
                     <div class="single-products-catagory clearfix">
                         <a href="" title="">
-                            <img src="{{ $category->getImageUrl() }}" alt="{{ $category->name }}" />
+                            <img src="{{ $category['image'] }}" alt="{{ $category['name'] }}" />
                             <div class="hover-content">
                                 <div class="line"></div>
-                                <p>From $180</p>
-                                <h4>{{ $category->name }}</h4>
+                                <p>{{ __('From :price lv.', ['price' => $category['price']]) }}</p>
+                                <h4>{{ $category['name'] }}</h4>
                             </div>
                         </a>
                     </div>

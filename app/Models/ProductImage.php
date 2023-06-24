@@ -14,4 +14,12 @@ class ProductImage extends Model
         'image',
         'is_main',
     ];
+
+    /**
+     * @return string
+     */
+    public function getImageUrl(): string
+    {
+        return asset('storage/uploads/product-images/' . $this->image);
+    }
 }

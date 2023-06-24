@@ -49,11 +49,11 @@ Route::prefix('cms')->as('cms.')->group(function () {
         });
 
         Route::controller(ProductController::class)->prefix('products')->as('products.')->group(function () {
-            Route::get('/',                'index')->name('index');
-            Route::get('/create',          'create')->name('create');
-            Route::post('/store',          'store')->name('store');
-            Route::get('/{color}/edit',    'edit')->name('edit');
-            Route::post('/{color}/update', 'update')->name('update');
+            Route::get('/',                  'index')->name('index');
+            Route::get('/create',            'create')->name('create');
+            Route::post('/store',            'store')->name('store');
+            Route::get('/{product}/edit',    'edit')->name('edit');
+            Route::post('/{product}/update', 'update')->name('update');
         });
     });
 });

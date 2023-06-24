@@ -16,14 +16,11 @@
         <script>
             $(function () {
                 if ($('.upload-images').length > 0) {
-                    let preloaded = [
-                        // {id: 1, src: 'https://picsum.photos/500/500?random=1'},
-                        // {id: 2, src: 'https://picsum.photos/500/500?random=2'},
-                        // {id: 3, src: 'https://picsum.photos/500/500?random=3'},
-                        // {id: 4, src: 'https://picsum.photos/500/500?random=4'},
-                        // {id: 5, src: 'https://picsum.photos/500/500?random=5'},
-                        // {id: 6, src: 'https://picsum.photos/500/500?random=6'},
-                    ];
+                    let preloaded = [];
+
+                    @isset($product, $old_images)
+                        preloaded = {!! json_encode($old_images) !!};
+                    @endisset
 
                     $('.upload-images').imageUploader({
                         preloaded: preloaded,
