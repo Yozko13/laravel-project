@@ -9,33 +9,6 @@
                         method="POST" enctype="multipart/form-data" class="forms-sample"
                     >
                         @csrf
-                        @isset($product)
-                            <div class="row margin-bottom-20">
-                                <label class="col-sm-3 col-form-label">{{ __('Image') }}</label>
-                                <div class="col-sm-9">
-                                    <img src="{{ asset('storage/uploads/products/' . $product->image) }}"
-                                        alt="{{ __('Image') }}" class="width-50p"
-                                    />
-                                </div>
-                            </div>
-                        @endisset
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">{{ __('Upload Images') }} *</label>
-                            <input type="file" name="image" class="file-upload-default" multiple />
-                            <div class="input-group col-sm-9">
-                                <input type="text" class="form-control file-upload-info" disabled
-                                    placeholder="{{ __('Upload Images') }}"
-                                />
-                                <span class="input-group-append">
-                                    <button class="file-upload-browse btn btn-primary" type="button">
-                                        {{ __('Upload Images') }}
-                                    </button>
-                                </span>
-                                @error('image')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
                         @php
                             $category_id   = old('category_id') ?? $product->category_id ?? '';
                             $chosen_colors = old('colors') ?? [];
@@ -44,6 +17,15 @@
                                 $chosen_colors = $product->colors->pluck('id')->toArray();
                             }
                         @endphp
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">{{ __('Upload Images') }} *</label>
+                            <div class="col-sm-9">
+                                <div class="upload-images" style="padding-top: .5rem;"></div>
+                                @error('images')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label" for="categoryId">{{ __('Category') }} *</label>
                             <div class="col-sm-9">
@@ -112,6 +94,9 @@
                                         </label>
                                     </div>
                                 @endforeach
+                                @error('colors')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary mr-2">{{ __(isset($product) ? 'Save' : 'Add') }}</button>

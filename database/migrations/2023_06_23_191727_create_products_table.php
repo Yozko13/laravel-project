@@ -25,7 +25,7 @@ return new class extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('product_color', function (Blueprint $table) {
+        Schema::create('color_product', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products');
             $table->foreignId('color_id')->constrained('colors');
@@ -49,7 +49,7 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('product_images');
-        Schema::dropIfExists('product_color');
+        Schema::dropIfExists('color_product');
         Schema::dropIfExists('products');
     }
 };

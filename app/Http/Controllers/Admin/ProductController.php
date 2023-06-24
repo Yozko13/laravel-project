@@ -8,6 +8,9 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\ProductImage;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -44,7 +47,44 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $data = $request->except('_token', 'images', 'old_images', 'colors');
+
+        DB::beginTransaction();
+
+        try {
+            $product = Product::create($data);
+
+            if (!isset($product)) {
+                throw new Exception("Is not create product", 1);
+            }
+
+            foreach ($request->images as $key => $image) {
+                $file = $image;
+                $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('public/uploads/product-images', $filename);
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image'      => $filename,
+                    'is_main'    => $key == 0,
+                ]);
+            }
+
+            $product->colors()->sync($request->colors);
+
+            DB::commit();
+
+            return to_route('cms.products.index')->with(
+                'success_message',
+                __('Successfully added :name :title', ['name' => __('Product'), 'title' => $product->name])
+            );
+        } catch (\Throwable $th) {
+            report($th);
+
+            DB::rollBack();
+
+            return back()->withErrors(['system_error' => __('System error')]);
+        }
     }
 
     /**
@@ -78,7 +118,18 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+
+        // if ($request->has('old_images')) {
+        //     foreach ($request->old_images as $old_image_id) {
+        //         # code...
+        //     }
+        //     $file = $request->file('image');
+        //     $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+        //     $file->storeAs('public/uploads/categories', $filename);
+
+        //     $product->image = $filename;
+        //     $product->save();
+        // }
     }
 
     /**

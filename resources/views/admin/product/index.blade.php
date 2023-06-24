@@ -31,8 +31,19 @@
                                         <td>
                                             <img src="{{ $product->getImageUrl() }}" alt="{{ __('Image') }}" />
                                         </td>
+                                        <td>{{ $product->category->name }}</td>
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->description }}</td>
+                                        <td>
+                                            @foreach ($product->colors as $color)
+                                                <p style="color: {{ $color->color }};">{{ $color->name }}</p>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            <label class="badge badge-{{ $product->in_stock ? 'success' : 'danger' }}">
+                                                {{ $product->in_stock ? __('In stock') : __('Not in stock') }}
+                                            </label>
+                                        </td>
                                         <td>
                                             <label class="badge badge-{{ $product->active ? 'success' : 'danger' }}">
                                                 {{ $product->active ? __('Active') : __('Inactive') }}
