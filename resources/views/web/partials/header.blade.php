@@ -15,6 +15,7 @@
 
         <!-- Core Style CSS -->
         <link rel="stylesheet" href="{{ asset('web/css/core-style.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/common-styles.css') }}" />
         <link rel="stylesheet" href="{{ asset('web/css/style.css') }}" />
     </head>
 <body>
@@ -37,7 +38,33 @@
         </div>
     </div>
     <!-- Search Wrapper Area End -->
-
+    @if (Session::has('success_message'))
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-success">{{ Session::get('success_message') }}</div>
+                </div>
+            </div>
+        </div>
+    @endif
+    @if (Session::has('error_message'))
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-danger">{{ Session::get('error_message') }}</div>
+                </div>
+            </div>
+        </div>
+    @endif
+    @error('system_error')
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-danger">{{ $message }}</div>
+                </div>
+            </div>
+        </div>
+    @enderror
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
 
@@ -81,7 +108,10 @@
             </div>
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="{{ asset('web/img/core-img/cart.png') }}" alt="" /> Cart <span>(0)</span></a>
+                <a href="{{ $current_cart ? route('cart.show', $current_cart->id) : route('shop-around') }}" class="cart-nav">
+                    <img src="{{ asset('web/img/core-img/cart.png') }}" alt="{{ __('Cart') }}" title="{{ __('Cart') }}" /> {{ __('Cart') }}
+                    <span>({{ $current_cart->quantity ?? 0 }})</span>
+                </a>
                 <a href="#" class="fav-nav"><img src="{{ asset('web/img/core-img/favorites.png') }}" alt="" /> Favourite</a>
                 <a href="#" class="search-nav"><img src="{{ asset('web/img/core-img/search.png') }}" alt="" /> Search</a>
             </div>

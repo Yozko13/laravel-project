@@ -65,7 +65,9 @@
             </div>
         </div>
         <div class="widget price mb-15">
-            <button type="submit" class="btn amado-btn mb-15">{{ __('Search') }}</button>
+            <button type="submit" class="btn amado-btn mb-15">
+                <img src="{{ asset('web/img/core-img/search.png') }}" alt="" /> {{ __('Search') }}
+            </button>
         </div>
     </form>
     <div class="amado_product_area section-padding-100">
@@ -127,7 +129,7 @@
                                 <div class="product-meta-data">
                                     <div class="line"></div>
                                     <p class="product-price">{{ $product->price }}лв.</p>
-                                    <a href="product-details.html">
+                                    <a href="{{ route('product', $product->slug) }}" title="{{ $product->name }}">
                                         <h6>{{ $product->name }}</h6>
                                     </a>
                                 </div>
@@ -140,13 +142,15 @@
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </div>
-                                    <div class="cart">
-                                        <a href="cart.html" data-toggle="tooltip" data-placement="left"
-                                            title="Add to Cart"
-                                        >
-                                            <img src="{{ asset('web/img/core-img/cart.png') }}" alt="" />
-                                        </a>
-                                    </div>
+                                    @if ($product->in_stock)
+                                        <div class="cart">
+                                            <a href="cart.html" data-toggle="tooltip" data-placement="left"
+                                                title="Add to Cart"
+                                            >
+                                                <img src="{{ asset('web/img/core-img/cart.png') }}" alt="" />
+                                            </a>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

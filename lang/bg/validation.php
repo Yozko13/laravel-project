@@ -168,7 +168,9 @@ return [
         'slug'        => 'Име за URL',
         'category_id' => 'Категория',
         'price'       => 'Цена',
+        'color'       => 'Цвят',
         'colors'      => 'Цветове',
+        'quantity'    => 'Количество',
     ],
 
 ];

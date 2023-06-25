@@ -22,3 +22,9 @@
         height: 40px;
         line-height: 40px;
     }
+    .main-content-wrapper .single-product-area .single_product_desc .product-meta-data .exhausted i {
+        color: #ff0000;
+    }
+    .main-content-wrapper .cart-table-area table thead tr th {
+        background-color: #f5f7fa;
+    }

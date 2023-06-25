@@ -6,6 +6,7 @@
     "Price": "Цена",
     "In stock": "В наличност",
     "Not in stock": "Не е в наличност",
+    "Exhausted": "Изчерпано",
     "Choose :option": "Избери :option",
     "Clean up": "Зачисти",
     "Login": "Вход",
@@ -32,6 +33,9 @@
     "Add :name": "Добави :name",
     "Successfully added :name :title": "Успешно добави :name :title",
     "Successfully saved :name :title": "Успешно запази :name :title",
+    "Successfully added :name to your cart": "Успешно добави :name към твоята кошница",
+    "Cart": "Кошница",
+    "The product is not availability": "Продуктът не е наличен",
     "Save": "Запази",
     "Back": "Назад",
     "System error": "Системна грешка",
@@ -50,5 +54,13 @@
     "Rising price": "Възходяща цена",
     "Descending price": "Низходяща цена",
     "Show": "Покажи",
-    "Apply": "Приложи"
+    "Apply": "Приложи",
+    "qty": "бр.",
+    "Quantity": "Количество",
+    "Grab them": "Грабни",
+    "Total": "Общо",
+    "Subtotal": "Междинна сума",
+    "Delivery": "Доставка",
+    "Free": "Безплатно",
+    "The shipping amount is determined by the supplier": "Сумата за доставка се определя от доставчика"
 }

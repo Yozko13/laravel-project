@@ -5,7 +5,9 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Web\CartController;
 use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\Web\ProductController as WebProductController;
 use App\Http\Controllers\Web\ShopController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +24,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/pazaruvai', [ShopController::class, 'index'])->name('shop-around');
+
+Route::controller(CartController::class)->prefix('cart')->as('cart.')->group(function () {
+    Route::get('/{cart}/show', 'show')->name('show');
+    Route::post('/add',        'store')->name('add');
+});
 
 Route::prefix('cms')->as('cms.')->group(function () {
     Route::controller(UserController::class)->group(function () {
@@ -59,3 +66,5 @@ Route::prefix('cms')->as('cms.')->group(function () {
         });
     });
 });
+
+Route::get('/product/{slug}', [WebProductController::class, 'show'])->name('product');

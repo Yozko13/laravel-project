@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 class WebController extends Controller
 {
@@ -15,9 +17,11 @@ class WebController extends Controller
      */
     public function view(string $route, array $params = [])
     {
-        $route_mame = Route::currentRouteName();
+        $route_mame    = Route::currentRouteName();
+        $current_cart  = Cart::where('session_id', Session::getId())->whereOrdered(false)->orderBy('id', 'DESC')->first();
+        $title_counter = 0;
 
-        return view($route, array_merge(compact('route_mame'), $params));
+        return view($route, array_merge(compact('route_mame', 'current_cart', 'title_counter'), $params));
     }
 
     /**

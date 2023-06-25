@@ -15,7 +15,6 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>{{ __('Image') }}</th>
-                                    <th>{{ __('Category') }}</th>
                                     <th>{{ __('Name') }}</th>
                                     <th>{{ __('Description') }}</th>
                                     <th>{{ __('Price') }}</th>
@@ -23,6 +22,7 @@
                                     <th>{{ __('Colors') }}</th>
                                     <th>{{ __('In stock') }}</th>
                                     <th>{{ __('Status') }}</th>
+                                    <th>{{ __('Category') }}</th>
                                     <th>{{ __('Actions') }}</th>
                                 </tr>
                             </thead>
@@ -33,7 +33,6 @@
                                         <td>
                                             <img src="{{ $product->getImageUrl() }}" alt="{{ __('Image') }}" />
                                         </td>
-                                        <td>{{ $product->category->name }}</td>
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->description }}</td>
                                         <td>{{ $product->price }}лв.</td>
@@ -53,6 +52,7 @@
                                                 {{ $product->active ? __('Active') : __('Inactive') }}
                                             </label>
                                         </td>
+                                        <td>{{ $product->category->name }}</td>
                                         <td>
                                             <a href="{{ route('cms.products.edit', $product->id) }}"
                                                 title="{{ __('Edit') }}" class="btn btn-outline-secondary btn-icon-text"
