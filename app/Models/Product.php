@@ -54,4 +54,14 @@ class Product extends Model
 
         return asset('storage/uploads/product-images/' . $main_image->image);
     }
+
+    /**
+     * @return string
+     */
+    public function getHoverImageUrl(): string
+    {
+        $main_image = $this->images->where('is_main', false)->first();
+
+        return asset('storage/uploads/product-images/' . $main_image->image);
+    }
 }

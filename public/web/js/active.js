@@ -109,9 +109,11 @@
             max: max,
             values: [value_min, value_max],
             slide: function (event, ui) {
-                var result = label_result + " " + unit + ui.values[0] + ' - ' + unit + ui.values[1];
-                console.log(t);
+                var result = label_result + " " + ui.values[0] + unit + ' - ' + ui.values[1] + unit;
                 t.closest('.slider-range').find('.range-price').html(result);
+
+                $('.slider-range input[name="price_from"]').val(ui.values[0]);
+                $('.slider-range input[name="price_to"]').val(ui.values[1]);
             }
         });
     });

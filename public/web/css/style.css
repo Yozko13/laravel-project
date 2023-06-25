@@ -11,3 +11,14 @@
     /* ---------------------------------------
     ##### - PLACE YOUR CUSTOM CSS HERE - #####
     --------------------------------------- */
+    .main-content-wrapper .header-area .logo {
+        margin-bottom: 50px;
+    }
+    .widget.color .widget-desc ul li a {
+        padding: 8px;
+    }
+    .filter-btn {
+        min-width: fit-content;
+        height: 40px;
+        line-height: 40px;
+    }

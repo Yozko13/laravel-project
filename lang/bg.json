@@ -7,6 +7,7 @@
     "In stock": "В наличност",
     "Not in stock": "Не е в наличност",
     "Choose :option": "Избери :option",
+    "Clean up": "Зачисти",
     "Login": "Вход",
     "Еmail": "Имейл",
     "Password": "Парола",
@@ -37,5 +38,17 @@
     "Active": "Активен",
     "Inactive": "Неактивен",
     "Edit": "Редактирай",
-    "From :price lv.": "От :price лв."
+    "From :price lv.": "От :price лв.",
+    "Shop around": "Пазарувай",
+    "Filters": "Филтри",
+    "Search": "Търси",
+    "Showing": "Показани",
+    "to": "до",
+    "of": "от",
+    "results": "резултата",
+    "Sort by": "Сортирай по",
+    "Rising price": "Възходяща цена",
+    "Descending price": "Низходяща цена",
+    "Show": "Покажи",
+    "Apply": "Приложи"
 }
