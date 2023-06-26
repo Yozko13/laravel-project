@@ -144,10 +144,13 @@
                                     </div>
                                     @if ($product->in_stock)
                                         <div class="cart">
-                                            <a href="cart.html" data-toggle="tooltip" data-placement="left"
-                                                title="Add to Cart"
+                                            <a href="{{ route('product', $product->slug) }}" data-toggle="tooltip"
+                                                data-placement="left" title="{{ __('Add to Cart') }}"
                                             >
-                                                <img src="{{ asset('web/img/core-img/cart.png') }}" alt="" />
+                                                <img src="{{ asset('web/img/core-img/cart.png') }}"
+                                                    alt="{{ __('Cart') }}"
+                                                    title="{{ $product->name }} - {{ __('Icon') }} {{ __('Cart') }} {{ $title_counter++ }}"
+                                                />
                                             </a>
                                         </div>
                                     @endif

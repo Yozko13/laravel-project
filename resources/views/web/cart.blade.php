@@ -15,7 +15,7 @@
                                     <th>{{ __('Name') }}</th>
                                     <th>{{ __('Price') }}</th>
                                     <th>{{ __('Color') }}</th>
-                                    <th>{{ __('Quantity') }}</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,7 +37,12 @@
                                         <td class="price">
                                             <span style="color: {{ $product->color->color }};">{{ $product->color->name }}</span>
                                         </td>
-                                        <td class="qty">1</td>
+                                        <td class="qty">
+                                            <a href="{{ route('cart.remove-product', $product->id) }}"
+                                                title="{{ __('Remove') }}"
+                                            ><i class="fa fa-times font-size-2em" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -53,7 +58,7 @@
                             <li><span>{{ __('Total') }}:</span> <span>{{ $cart->sum_price }}лв.</span></li>
                         </ul>
                         <div class="cart-btn mt-100">
-                            <a href="cart.html" class="btn amado-btn w-100">Checkout</a>
+                            <a href="{{ route('order.create') }}" class="btn amado-btn w-100">{{ __('Confirm') }}</a>
                         </div>
                     </div>
                 </div>

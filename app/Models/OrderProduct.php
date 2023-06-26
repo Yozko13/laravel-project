@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CartProduct extends Model
+class OrderProduct extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
-        'cart_id',
+        'order_id',
         'product_id',
         'color_id',
         'name',
@@ -23,9 +23,9 @@ class CartProduct extends Model
     /**
      * @return belongsTo
      */
-    public function cart()
+    public function order()
     {
-        return $this->belongsTo(Cart::class);
+        return $this->belongsTo(Order::class);
     }
 
     /**

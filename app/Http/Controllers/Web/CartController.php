@@ -108,4 +108,24 @@ class CartController extends WebController
     {
         return $this->view('web.cart', compact('cart'));
     }
+
+    /**
+     * @param  \App\Models\CartProduct  $cartProduct
+     * @return \Illuminate\Http\Response
+     */
+    public function removeProduct(CartProduct $cartProduct)
+    {
+        $cart = $cartProduct->cart;
+        $cart->quantity  -= 1;
+        $cart->sum_price -= $cartProduct->price;
+
+
+        if ($cartProduct->delete()) {
+            $cart->save();
+
+            return back()->with('success_message', __('You have successfully removed the product from the basket'));
+        }
+
+        return back()->with('error_message', __('Something went wrong, please try again'));
+    }
 }

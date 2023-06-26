@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Web\CartController;
 use App\Http\Controllers\Web\HomeController;
@@ -26,8 +27,14 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/pazaruvai', [ShopController::class, 'index'])->name('shop-around');
 
 Route::controller(CartController::class)->prefix('cart')->as('cart.')->group(function () {
-    Route::get('/{cart}/show', 'show')->name('show');
-    Route::post('/add',        'store')->name('add');
+    Route::post('/add',                         'store')->name('add');
+    Route::get('/{cart}/show',                  'show')->name('show');
+    Route::get('/product/{cartProduct}/remove', 'removeProduct')->name('remove-product');
+});
+
+Route::controller(OrderController::class)->prefix('order')->as('order.')->group(function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
 });
 
 Route::prefix('cms')->as('cms.')->group(function () {

@@ -38,6 +38,21 @@
         </div>
     </div>
     <!-- Search Wrapper Area End -->
+    @if (env('APP_DEBUG') && $errors->any())
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     @if (Session::has('success_message'))
         <div class="container-fluid">
             <div class="row">
