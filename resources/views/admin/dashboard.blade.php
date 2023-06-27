@@ -19,8 +19,8 @@
                             <span class="count bg-success"></span>
                         </div>
                         <div class="profile-name">
-                            <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
-                            <span>Gold Member</span>
+                            <h5 class="mb-0 font-weight-normal">{{ Auth::user()->name }}</h5>
+                            <span>{{ __('Admin') }}</span>
                         </div>
                     </div>
                     <a href="#" id="profile-dropdown" data-toggle="dropdown"><i
@@ -102,60 +102,11 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="../../pages/tables/basic-table.html">
+                <a class="nav-link" href="{{ route('cms.orders.index') }}">
                     <span class="menu-icon">
-                        <i class="mdi mdi-table-large"></i>
+                        <i class="mdi mdi-shopping"></i>
                     </span>
-                    <span class="menu-title">Tables</span>
-                </a>
-            </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="../../pages/charts/chartjs.html">
-                    <span class="menu-icon">
-                        <i class="mdi mdi-chart-bar"></i>
-                    </span>
-                    <span class="menu-title">Charts</span>
-                </a>
-            </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="../../pages/icons/mdi.html">
-                    <span class="menu-icon">
-                        <i class="mdi mdi-contacts"></i>
-                    </span>
-                    <span class="menu-title">Icons</span>
-                </a>
-            </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false"
-                    aria-controls="auth">
-                    <span class="menu-icon">
-                        <i class="mdi mdi-security"></i>
-                    </span>
-                    <span class="menu-title">User Pages</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="auth">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="../../pages/samples/blank-page.html"> Blank
-                                Page </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="../../pages/samples/error-404.html"> 404 </a>
-                        </li>
-                        <li class="nav-item"> <a class="nav-link" href="../../pages/samples/error-500.html"> 500 </a>
-                        </li>
-                        <li class="nav-item"> <a class="nav-link" href="../../pages/samples/login.html"> Login </a>
-                        </li>
-                        <li class="nav-item"> <a class="nav-link" href="../../pages/samples/register.html"> Register
-                            </a></li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link"
-                    href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
-                    <span class="menu-icon">
-                        <i class="mdi mdi-file-document-box"></i>
-                    </span>
-                    <span class="menu-title">Documentation</span>
+                    <span class="menu-title">{{ __('Orders') }}</span>
                 </a>
             </li>
         </ul>
@@ -330,7 +281,7 @@
                         <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                             <div class="navbar-profile">
                                 <img class="img-xs rounded-circle" src="{{ asset('admin/images/faces/face15.jpg') }}" alt="" />
-                                <p class="mb-0 d-none d-sm-block navbar-profile-name">Henry Klein</p>
+                                <p class="mb-0 d-none d-sm-block navbar-profile-name">{{ Auth::user()->name }}</p>
                                 <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                             </div>
                         </a>

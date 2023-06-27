@@ -7,6 +7,7 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Cart;
 use App\Models\OrderProduct;
+use App\Models\OrderStatus;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -20,7 +21,14 @@ class OrderController extends WebController
      */
     public function index()
     {
-        //
+        $orders = Order::orderBy('updated_at', 'DESC')
+            ->when(request('status'), function ($q) {
+                $q->whereStatus(request('status'));
+            })
+            ->paginate(20)
+        ;
+
+        return view('admin.order.index', compact('orders'));
     }
 
     /**
@@ -96,40 +104,38 @@ class OrderController extends WebController
      */
     public function show(Order $order)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateOrderRequest  $request
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateOrderRequest $request, Order $order)
-    {
-        //
+        return view('admin.order.details', compact('order'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Order  $order
+     * @param  integer $status
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function changeStatus(Order $order, int $status)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            $order->status = $status;
+            $order->save();
+
+            OrderStatus::create([
+                'order_id' => $order->id,
+                'status'   => $status,
+            ]);
+
+            DB::commit();
+
+            return back()->with('success_message', __('Status changed successfully for order number :number', ['number' => $order->id]));
+        } catch (\Throwable $th) {
+            report($th);
+
+            DB::rollBack();
+
+            return back()->withErrors(['system_error' => __('System error')]);
+        }
     }
 }

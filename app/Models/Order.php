@@ -11,15 +11,6 @@ class Order extends Model
     use HasFactory;
     use SoftDeletes;
 
-    const PENDING_STATUS    = 1;
-    const IN_PROGRES_STATUS = 2;
-    const SUBMITED_STATUS   = 3;
-    const RECEIVED_STATUS   = 4;
-    const REJECTED_STATUS   = 5;
-    const REPIRED_STATUS    = 6;
-    const RESUBMITED_STATUS = 7;
-    const COMPLETED_STATUS  = 8;
-
     protected $fillable = [
         'cart_id',
         'session_id',
@@ -45,5 +36,13 @@ class Order extends Model
     public function products()
     {
         return $this->hasMany(OrderProduct::class);
+    }
+
+    /**
+     * @return hasMany
+     */
+    public function statuses()
+    {
+        return $this->hasMany(OrderStatus::class);
     }
 }

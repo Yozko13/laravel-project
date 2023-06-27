@@ -71,6 +71,13 @@ Route::prefix('cms')->as('cms.')->group(function () {
             Route::get('/{product}/edit',    'edit')->name('edit');
             Route::post('/{product}/update', 'update')->name('update');
         });
+
+        Route::controller(OrderController::class)->prefix('orders')->as('orders.')->group(function () {
+            Route::get('/',                               'index')->name('index');
+            Route::get('/{order}/show',                   'show')->name('show');
+            Route::get('/{order}/change/{status}/status', 'changeStatus')->name('change-status');
+        });
+
     });
 });
 

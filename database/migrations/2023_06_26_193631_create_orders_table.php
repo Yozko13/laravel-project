@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Order;
+use App\Models\OrderStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->enum('payment_type', ['cod'])->default('cod');
             $table->integer('quantity');
             $table->decimal('sum_price');
-            $table->smallInteger('status')->unsigned()->default(Order::PENDING_STATUS);
+            $table->smallInteger('status')->unsigned()->default(OrderStatus::PENDING_STATUS);
             $table->timestamps();
             $table->softDeletes();
         });
